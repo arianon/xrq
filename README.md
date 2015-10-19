@@ -1,5 +1,5 @@
 # xrq
-**X** **R**esource **Q** uery,
+**X** **R**esource **Q**uery,
 A program for querying the X Resources Database from the command line.
 
 ## Installing
