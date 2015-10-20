@@ -1,8 +1,8 @@
 # xrq
 
-[![](https://travis-ci.org/arianon/xrq.svg)](https://travis-ci.org/arianon/xrq)
+[![](https://img.shields.io/travis/arianon/xrq.svg?style=flat-square)](https://travis-ci.org/arianon/xrq)
 
-**X** **R**esource **Q** uery,
+**X** **R**esource **Q**uery,
 A program for querying the X Resources Database from the command line.
 
 ## Installing
@@ -14,7 +14,7 @@ $ sudo make install
 ```
 
 ## Usage
-On my computer, the following command:
+At the computer and time of writing, the following command:
 ```sh
 $ xrq URxvt.foreground URxvt.background URxvt.font
 ```
