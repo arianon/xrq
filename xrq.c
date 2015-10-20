@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <err.h>
 #include <X11/Xresource.h>
 
 void xrdb_print_value(XrmDatabase db, char* resource) {
 	char *type;
 	XrmValue xvalue;
 
-	XrmGetResource(db, resource, "String", &type, &xvalue);
+	XrmGetResource(db, resource, "*", &type, &xvalue);
 
-	if (xvalue.addr != NULL && (strcmp("String", type) == 0)) {
-		printf("%s\n", xvalue.addr);
-	} else {
-		fprintf(stderr, "Failed to get xrdb value '%s'.\n", resource);
-	}
+	if (xvalue.addr != NULL)
+		puts(xvalue.addr);
+	else
+		errx(1, "failed to get xrdb value '%s'.", resource);
 }
 
 int main(int argc, char* argv[]) {
@@ -22,20 +22,14 @@ int main(int argc, char* argv[]) {
 	char *xrm;
 	int i;
 
-	if (argv[1] == NULL || !strcmp(argv[1], "-h")) {
-		printf("Usage: %s <resource names>...\n", argv[0]);
-		exit(1);
-	} else {
-		/* Shift the program name out of the argument vector */
-		++argv;
-		--argc;
-	}
+	if (argv[1] == NULL || !strcmp(argv[1], "-h"))
+		errx(1, "usage: %s <resource names>...", argv[0]);
+	else
+		++argv;	--argc; /* Shift the program name out of the argument vector */
 
 
-	if ((dpy = XOpenDisplay(NULL)) == NULL) {
-		fprintf(stderr, "Couldn't open the display!\n");
-		exit(1);
-	};
+	if (!(dpy = XOpenDisplay(NULL)))
+		errx(1, "could not open the display!");
 
 	XrmInitialize();
 	xrm = XResourceManagerString(dpy);
@@ -49,7 +43,7 @@ int main(int argc, char* argv[]) {
 		XrmDestroyDatabase(xrdb);
 		return 0;
 	} else {
-		fprintf(stderr, "Couldn't get the RESOURCE_MANAGER property from the root window.\n");
+		warnx("could not get the resource properties.");
 		return 1;
 	}
 }
