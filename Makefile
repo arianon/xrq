@@ -3,6 +3,7 @@ include config.mk
 SRC = xrq.c
 OBJ = $(SRC:.c=.o)
 BIN = $(SRC:.c=)
+MAN = $(SRC:.c=.1)
 
 .POSIX:
 all: $(BIN)
@@ -14,9 +15,8 @@ $(BIN): $(OBJ)
 	$(LD) -o $@ $(OBJ) $(LDFLAGS)
 
 install: $(BIN)
-	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp -f $(BIN) $(DESTDIR)$(PREFIX)/bin
-	chmod 755 $(DESTDIR)$(PREFIX)/bin/$(BIN)
+	install -Dm755 $(BIN) $(DESTDIR)$(PREFIX)/bin
+	install -Dm644 $(MAN) $(DESTDIR)$(MANPREFIX)/man1
 
 uninstall:
 	rm -f $(DESTIDR)$(PREFIX)/bin/$(BIN)

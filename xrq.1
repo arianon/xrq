@@ -1,0 +1,63 @@
+.Dd October 20, 2015
+.Dt XRQ 1
+.Sh NAME
+.Nm xrq
+.Nd query the X Resource Database
+.Sh SYNOPSIS
+.Nm xrq
+.Ar resource Op ...
+.Sh DESCRIPTION
+.Nm
+queries the X Resource Database for the values of the given
+.Ar resources
+and prints them to the standard output.
+.Sh ENVIRONMENT
+.Nm
+acts on the X display specified by the
+.Ev DISPLAY
+variable.
+.Sh EXAMPLES
+At the computer and time of writing, the following command
+.Pp
+.Dl $ xrq URxvt.foreground URxvt.background URxvt.font
+.Pp
+Yields the following values
+.Pp
+.Dl #b7bdcc
+.Dl #14181f
+.Dl -*-tewi-medium-*-*-*-11-*-*-*-*-*-iso10646-*
+.Pp
+For querying all 16 colors, one could take advantage of shell expansion.
+.Pp
+.Dl $ xrq URxvt.color{0..15}
+.Pp
+yields
+.Pp
+.Dl #2b303b
+.Dl #994e55
+.Dl #849971
+.Dl #c5aa75
+.Dl #707e8c
+.Dl #8f7189
+.Dl #778f8e
+.Dl #a6aab2
+.Dl #4d576b
+.Dl #bf616a
+.Dl #a3be8c
+.Dl #ebcb8b
+.Dl #8fa1b3
+.Dl #b48ead
+.Dl #96b5b4
+.Dl #b9bbbe
+If in your 
+.Pa ~/.Xresources
+or
+.Pa ~/.Xdefaults
+you use glob patterns - such as 
+.Em *color4: #aabbcc
+- you could simply skip the class's name that precedes the resource name. thus the above commands could become this:
+.Pp
+.Dl $ xrq color{0..15}
+.Sh SEE ALSO
+.Xr XrmGetResource 3 ,
+.Xr XrmGetFileDatabase 3
