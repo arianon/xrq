@@ -1,5 +1,8 @@
 # xrq
-**X** **R**esource **Q**uery,
+
+[![](https://travis-ci.org/arianon/xrq.svg)](https://travis-ci.org/arianon/xrq)
+
+**X** **R**esource **Q** uery,
 A program for querying the X Resources Database from the command line.
 
 ## Installing
