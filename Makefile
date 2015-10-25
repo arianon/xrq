@@ -15,8 +15,8 @@ $(BIN): $(OBJ)
 	$(LD) -o $@ $(OBJ) $(LDFLAGS)
 
 install: $(BIN)
-	install -Dm755 $(BIN) $(DESTDIR)$(PREFIX)/bin
-	install -Dm644 $(MAN) $(DESTDIR)$(MANPREFIX)/man1
+	install -Dm755 $(BIN) $(DESTDIR)$(PREFIX)/bin/$(BIN)
+	install -Dm644 $(MAN) $(DESTDIR)$(MANPREFIX)/man1/$(MAN)
 
 uninstall:
 	rm -f $(DESTIDR)$(PREFIX)/bin/$(BIN)
