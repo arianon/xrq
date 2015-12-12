@@ -20,12 +20,15 @@ int main(int argc, char* argv[]) {
 	XrmDatabase xrdb;
 	Display *dpy;
 	char *xrm;
-	int i;
+	size_t i;
 
 	if (argv[1] == NULL || !strcmp(argv[1], "-h"))
 		errx(1, "usage: %s <resource names>...", argv[0]);
-	else
-		++argv;	--argc; /* Shift the program name out of the argument vector */
+	else {
+		/* Shift the program name out of the argument vector */
+		++argv;
+		--argc;
+    }
 
 
 	if (!(dpy = XOpenDisplay(NULL)))
