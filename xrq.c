@@ -21,6 +21,7 @@ int main(int argc, char* argv[]) {
 	Display *dpy;
 	char *xrm;
 	size_t i;
+	int ret_code;
 
 	if (argv[1] == NULL || !strcmp(argv[1], "-h"))
 		errx(1, "usage: %s <resource names>...", argv[0]);
@@ -44,9 +45,12 @@ int main(int argc, char* argv[]) {
 			xrdb_print_value(xrdb, argv[i]);
 
 		XrmDestroyDatabase(xrdb);
-		return 0;
+		ret_code = 0;
 	} else {
 		warnx("could not get the resource properties.");
-		return 1;
+		ret_code = 1;
 	}
+
+	XFlush(dpy);
+	return ret_code;
 }
