@@ -70,5 +70,6 @@ main(int argc, char* argv[])
 	}
 
 	XFlush(dpy);
+	XCloseDisplay(dpy);
 	return ret_code;
 }
